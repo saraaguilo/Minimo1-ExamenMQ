@@ -39,17 +39,17 @@ public class GameService {
     @POST
     @ApiOperation(value = "Create Game", notes = "")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "All good", response = Juego.class),
-            @ApiResponse(code = 404, message = "You're not legally allowed to see this"),
-
+            @ApiResponse(code = 201, message = "Game created", response = Juego.class),
+            @ApiResponse(code = 400, message = "Invalid request"),
     })
-    @Path("/juego/crearJuego")
+    @Path("/juegos")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearJuego(Juego juego) {
+    public Response crearJuego(Juego request) {
+        Juego juego = new Juego(request.getIdJuego(), request.getDescJuego(), request.getNumNivell(), request.getPuntosPorNivel());
         Juego j = this.gm.crearJuego(juego.getIdJuego(), juego.getDescJuego(), juego.getNumNivell(), juego.getPuntosPorNivel());
-        if (j ==null){
-            return Response.status(404).build();
+        if (j == null) {
+            return Response.status(400).build();
         }
         return Response.status(201).entity(j).build();
     }
@@ -60,9 +60,9 @@ public class GameService {
             @ApiResponse(code = 201, message = "All good", response = Juego.class),
             @ApiResponse(code = 404, message = "Player or game does not exists"),
     })
-    @Path("/usuario/{id}/NumNivellActual")
+    @Path("/usuario/{idU}/NumNivellActual")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getNumNivellActual(@PathParam("id") String idU) {
+    public Response getNumNivellActual(@PathParam("idU") String idU) {
         int lvl = this.gm.getNumNivellActual(idU);
         if (lvl>=0){
             return Response.status(201).entity(lvl).build();
@@ -77,7 +77,7 @@ public class GameService {
             @ApiResponse(code = 404, message = "Game does not exists"),
     })
     @Path("/usuario/{idU}/inicioPartida/{idJ}")
-    public Response inicioPartida(String idJ, String idU) {
+    public Response inicioPartida(@PathParam("idJ")String idJ,@PathParam("idU") String idU) {
         Juego j = this.gm.inicioPartida(idJ,idU);
         if(j!=null){
             return Response.status(201).entity(j).build();
@@ -124,8 +124,8 @@ public class GameService {
             @ApiResponse(code = 202, message = "Game ended"),
             @ApiResponse(code = 404, message = "Player/game does not exist")
     })
-    @Path("/usuario/pasarNivel")
-    public Response pasarNivel(String idU, int puntosAcumulados, String fechaInicio) {
+    @Path("/usuario/pasarNivel/¨{idU}/{puntosAcumulados}/{fechaInicio}")
+    public Response pasarNivel(@PathParam("idU") String idU, @PathParam("puntosAcumulados") int puntosAcumulados, @PathParam("fechaInicio")String fechaInicio) {
         Usuario u = this.gm.pasarNivel(idU,puntosAcumulados,fechaInicio);
         if(u==null){
             return Response.status(404).build();

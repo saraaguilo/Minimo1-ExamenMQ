@@ -9,8 +9,5 @@
         <module name="Minim1_2022QT" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Minim1_2022QT" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
