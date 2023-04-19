@@ -1,19 +1,21 @@
 package gm;
 
-public class Juego{
-    private Integer idJuego;
-    private String descJuego;
-    private Integer numNivell;
-    private Integer puntosPorNivel;
+import java.util.List;
 
-    public Juego (Integer idJuego, String descJuego, Integer numNivell, Integer puntosPorNivel){
+public class Juego{
+    private String idJuego;
+    private String descJuego;
+    private int numNivell;
+    private int puntosPorNivel;
+    private List<Usuario> listaUsuario;
+
+    public Juego (String idJuego, String descJuego, int numNivell, int puntosPorNivel){
         this.idJuego = idJuego;
         this.descJuego = descJuego;
         this.numNivell = numNivell;
         this.puntosPorNivel = puntosPorNivel;
     }
-    public Juego (){
-
+    public Juego (String juego){
     }
 
     public Integer getPuntosPorNivel() {
@@ -24,11 +26,11 @@ public class Juego{
         this.puntosPorNivel = puntosPorNivel;
     }
 
-    public Integer getIdJuego() {
+    public String getIdJuego() {
         return idJuego;
     }
 
-    public void setIdJuego(Integer idJuego) {
+    public void setIdJuego(String idJuego) {
         this.idJuego = idJuego;
     }
 

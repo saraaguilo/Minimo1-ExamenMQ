@@ -1,5 +1,4 @@
 package gm;
-import java.util.Date;
 
 public class Partida {
     private String id;
@@ -7,19 +6,18 @@ public class Partida {
     private Usuario usuario;
     private int nivelActual;
     private int puntosAcumulados;
-    private Date fechaInicio;
+    private String fechaInicio;
 
-    public Partida(String id, Juego juego, Usuario usuario, int nivelActual, int puntosAcumulados, Date fechaInicio) {
+    public Partida(String id, Juego juego, Usuario usuario, int nivelActual, int puntosAcumulados, String fechaInicio) {
         this.id = id;
         this.juego = juego;
         this.usuario = usuario;
         this.nivelActual = 1;
         this.puntosAcumulados = 50;
-        this.fechaInicio = new Date();
+        this.fechaInicio = fechaInicio;
     }
 
     public Partida(Juego juego, Usuario usuario){
-
     }
 
     public String getId() {
@@ -62,11 +60,11 @@ public class Partida {
         this.puntosAcumulados = puntosAcumulados;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 }

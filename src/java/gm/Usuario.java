@@ -6,22 +6,22 @@ import java.util.List;
 public class Usuario {
     private String idUsuario;
     private String nombreUsuario;
-    private Partida partidaActual;
-    private Integer numPuntos;
+    private String idPartidaActual;
+    private int numPuntos;
     private List<Partida> partidasJugadasList;
     private List<Usuario> listaUsuarios;
-    private Juego juego;
+    private Boolean jugando;
 
-    public Usuario(String idUsuario, String nombreUsuario, Partida partidaActual, Integer numPuntos, Juego juego){
+    public Usuario(String idUsuario, String nombreUsuario, String idPartidaActual, int numPuntos){
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
-        this.partidaActual = partidaActual;
+        this.idPartidaActual = idPartidaActual;
         this.numPuntos = numPuntos;
         partidasJugadasList = new ArrayList<>();
         listaUsuarios = new ArrayList<>();
-        this.juego = juego;
+
     }
-    public Usuario(){
+    public Usuario(Usuario idUser){
     }
 
     public String getNombreUsuario() {
@@ -32,20 +32,14 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public Juego getJuego() {
-        return juego;
+
+
+    public String getIdPartidaActual() {
+        return idPartidaActual;
     }
 
-    public void setJuego(Juego juego) {
-        this.juego = juego;
-    }
-
-    public Partida getPartidaActual() {
-        return partidaActual;
-    }
-
-    public void setPartidaActual(Partida partidaActual) {
-        this.partidaActual = partidaActual;
+    public void setIdPartidaActual(String idPartidaActual) {
+        this.idPartidaActual = idPartidaActual;
     }
 
     public List<Partida> getPartidasJugadasList() {
@@ -76,6 +70,10 @@ public class Usuario {
         this.numPuntos = numPuntos;
     }
 
+    public void setNumPuntos(int numPuntos) {
+        this.numPuntos = numPuntos;
+    }
+
     public List<Usuario> getListaUsuarios(Integer idJuego) {
         List<Usuario> usuarios = new ArrayList<>();
         return listaUsuarios;
@@ -92,5 +90,17 @@ public class Usuario {
             }
         }
         return partidasUsuario;
+    }
+    public Boolean getJugando() {
+        return jugando;
+    }
+
+    public void setJugando(Boolean jugando) {
+        this.jugando = jugando;
+    }
+
+    public void addPartida(Partida partida){
+        this.partidasJugadasList.add(Integer.parseInt(partida.getId()), partida);
+        this.jugando=true;
     }
 }
